@@ -14,9 +14,6 @@ router.get('/contacts/:contactId', isValidId, ctrlWrapper(getContactByIdControll
 
 router.post('/contacts', validateBody(createContactSchema), ctrlWrapper(createContactController));
 
-// Валідування тіла запиту 
-// router.post('/', validateBody(createContactSchema), ctrlWrapper(createContactController));
-
 router.patch('/contacts/:contactId', isValidId, validateBody(updateContactSchema), ctrlWrapper(patchContactController));
 
 router.delete('/contacts/:contactId', ctrlWrapper(deleteContactController));
