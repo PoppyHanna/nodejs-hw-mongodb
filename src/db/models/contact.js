@@ -26,7 +26,7 @@ const contactsSchema = new Schema(
             enum: ['work', 'home', 'personal'],
             default: 'personal',
         },
-        owner: {
+        userId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
             required: true,

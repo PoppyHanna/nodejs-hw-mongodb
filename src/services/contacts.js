@@ -13,7 +13,7 @@ export const getAllContacts = async ({
     const limit = perPage;
     const skip = (page - 1) * perPage;
 
-    const query = ContactsCollection.find({ owner: userId });
+    const query = ContactsCollection.find({ userId: userId });
 
     if (filter.isFavourite !== undefined) {
         query.where('isFavourite').equals(filter.isFavourite);
@@ -24,7 +24,7 @@ export const getAllContacts = async ({
     }
     
     const [contactsCount, contacts] = await Promise.all([
-        ContactsCollection.find().countDocuments({owner: userId}),
+        ContactsCollection.find().countDocuments({userId: userId}),
         // contactsQuery
         query
         .skip(skip)
@@ -43,20 +43,16 @@ export const getAllContacts = async ({
 };
 
 export const getContactById = async (contactId, userId) => {
-    return ContactsCollection.findOne({ _id: contactId, owner: userId });
-    // const contact = await ContactsCollection.findById(contactId);
-    // return contact;
+    return ContactsCollection.findOne({ _id: contactId, userId: userId });
 };
   
 export const createContact = async (payload, userId) => {
-    return ContactsCollection.create({ ...payload, owner: userId });
-    // const contact = await ContactsCollection.create(payload);
-    // return contact;
+    return ContactsCollection.create({ ...payload, userId: userId });
 };
 
 export const updateContact = async (contactId, payload, userId, options = {}) => {
     const rawResult = await ContactsCollection.findOneAndUpdate(
-        { _id: contactId, owner: userId },
+        { _id: contactId, userId: userId },
         payload,
         {
             new: true,
@@ -69,14 +65,14 @@ export const updateContact = async (contactId, payload, userId, options = {}) =>
 
     return {
         contact: rawResult.value,
-        isNew: Boolean(rawResult?.lastErrorObject?.upserted),
+        isNew: false,
     };
 };
 
 export const deleteContact = async (contactId, userId) => { 
     const contact = await ContactsCollection.findOneAndDelete({
         _id: contactId,
-        owner: userId,
+        userId: userId,
     });
 
     return contact;
