@@ -47,14 +47,14 @@ export const loginUser = async (payload) => {
 
     const accessToken = randomBytes(30).toString('base64');
     const refreshToken = randomBytes(30).toString('base64');
-
+    
     return await SessionsCollection.create({
         userId: user._id,
         accessToken,
         refreshToken,
         accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
         refreshTokenValidUntil: new Date(Date.now() + ONE_DAY),
-    }); 
+    });
 };
 
 export const logoutUser = async (sessionId) => { 
@@ -83,10 +83,10 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
         throw createHttpError(401, 'Session not found!');
     };
 
-    const isSesssionTokenExpired =
+    const isSessionTokenExpired =
         new Date() > new Date(session.refreshTokenValidUntil);
     
-    if (isSesssionTokenExpired) {
+    if (isSessionTokenExpired) {
         throw createHttpError(401, 'Session token expired!');
     }
 
