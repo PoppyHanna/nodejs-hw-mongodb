@@ -12,6 +12,12 @@ cloudinary.v2.config({
 });
 
 export const saveFileToCloudinary = async (file) => { 
+
+    console.log('File received by Cloudinary helper:', file);
+    if (!file?.path) {
+        throw new Error('File path is missing');
+    }
+
     const response = await
         cloudinary.v2.uploader.upload(file.path);
     await fs.unlink(file.path);
