@@ -43,14 +43,45 @@ export const getContactByIdController = async (req, res, next) => {
     });  
 };
 
-export const createContactController = async (req, res) => {
-    const contact = await createContact(req.body, req.user._id);
+export const createContactController = async (req, res, next) => {
+    // const contact = await createContact(req.body, req.user._id);
 
-    res.status(201).json({
-        status: 201,
-        message: 'Successfully created a contact!',
-        data: contact,
-    });
+    // res.status(201).json({
+    //     status: 201,
+    //     message: 'Successfully created a contact!',
+    //     data: contact,
+    // });
+
+    const photo = req.file;
+    let photoUrl;
+
+    try {
+        if (foto) {
+            if (getEnvVar('ENABLE_CLOUDINARY') === 'true') {
+                photoUrl = await saveFileToCloudinary(photo);
+            } else {
+                photo = await saveFileToUploadDir(photo);
+            }
+        }
+    
+
+        const contact = await createContact(
+            {
+                ...req.body,
+                photo: photoUrl,
+            },
+            req.user._id
+        );
+
+        res.status(201).json({
+            status: 201,
+            message: 'Successfully created a contact!',
+            data: result.contact,
+        });
+
+    } catch (error) {
+        next(createHttpError(500, '❌ Something went wrong!!!'));
+    };
 };
 
 export const patchContactController = async (req, res, next) => { 
