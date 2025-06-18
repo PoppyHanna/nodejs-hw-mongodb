@@ -21,7 +21,7 @@ requestBody:
           _id:
             description: "Contact's id"
             type: string
-            example: 65e4decdd286b30065d54af9
+            example: 684740190f83d8c2d2180c86
           name:
             description: "Contact's name"
             type: string

@@ -20,7 +20,7 @@ export const setupServer = () => {
   app.use(cors());
   app.use(cookieParser());
 
-  app.use('/api', router);
+  // app.use('/api', router);
 
   app.use(
     pino({
@@ -37,7 +37,7 @@ export const setupServer = () => {
   });
 
   app.use('/api-docs', swaggerUiServe, swaggerUiSetup);
-  // app.use(router);
+  app.use(router);
 
   app.use(notFoundHandler);
 
