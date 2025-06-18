@@ -1,0 +1,15 @@
+description: Login successful
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        token:
+          type: string
+          example: your.jwt.token
+        user:
+          type: object
+          properties:
+            email:
+              type: string
+              example: user@example.com
