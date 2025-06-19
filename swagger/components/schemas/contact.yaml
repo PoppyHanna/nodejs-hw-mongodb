@@ -1,26 +1,41 @@
 type: object
 required:
+  - _id
   - name
   - phoneNumber
   - email
   - contactType
 properties:
+  _id:
+    description: "Contact's id"
+    type: string
+    example: 6847403b0f83d8c2d2180c8a
+  userId:
+    description: 'Id of the user who owns the contact'
+    type: string
+    example: 65ca67e7ae7f10c88b598384
   name:
     description: "Contact's name"
     type: string
+    example: 'John Doe'
   phoneNumber:
     description: "Contact's phone number"
     type: string
+    example: '+380000000002'
   email:
     description: "Contact's email"
     type: string
+    example: 'oleh1@example.com'
   isFavourite:
     description: 'When a contact is favourite'
     type: boolean
+    example: true
   contactType:
     description: "Contact's type"
     type: string
     enum: ['work', 'home', 'personal']
+    example: home
   photo:
     description: "Link to contact's photo"
     type: string
+    example: https://res.cloudinary.com/uqwgdu/image/upload/image.png

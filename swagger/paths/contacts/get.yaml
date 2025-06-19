@@ -30,16 +30,6 @@ parameters:
       enum: ['work', 'home', 'personal']
     description: 'Filter by contact type'
   - in: query
-    name: name
-    schema:
-      type: string
-      description: 'Filter by name'
-  - in: query
-    name: email
-    schema:
-      type: string
-      description: 'Filter by email'
-  - in: query
     name: sortBy
     schema:
       type: string

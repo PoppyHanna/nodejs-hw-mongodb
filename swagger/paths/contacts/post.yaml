@@ -51,9 +51,11 @@ responses:
             - data
           properties:
             status:
-              type: integer
+              type: string
+              example: success
             message:
               type: string
+              example: 'Contact created'
             data:
               $ref: '../../components/schemas/contact.yaml'
   '401':
