@@ -6,38 +6,30 @@ description: 'Create a contact with payload'
 security:
   - bearerAuth: []
 requestBody:
+  required: true
   content:
     multipart/form-data:
       schema:
         type: object
         required:
           - name
-          - age
           - phoneNumber
           - email
-          - isFavourite
           - contactType
         properties:
-          _id:
-            description: "Contact's id"
-            type: string
-            example: 684740190f83d8c2d2180c86
           name:
             description: "Contact's name"
             type: string
-            example: 'John Doe'
           phoneNumber:
             description: "Contact's phone number"
-            type: number
-            example: '+380000000002'
+            type: string
           email:
             description: "Contact's email"
             type: string
-            example: 'oleh2@example.com'
+            format: email
           isFavourite:
-            description: 'When a contact is favourite'
+            description: 'Is contact favourite'
             type: boolean
-            example: false
           contactType:
             description: "Contact's type"
             type: string
@@ -60,10 +52,8 @@ responses:
           properties:
             status:
               type: integer
-              example: 201
             message:
               type: string
-              example: Successfully created a contact!
             data:
               $ref: '../../components/schemas/contact.yaml'
   '401':
