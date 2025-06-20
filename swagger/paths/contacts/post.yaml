@@ -52,7 +52,7 @@ responses:
           properties:
             status:
               type: string
-              example: success
+              example: 201
             message:
               type: string
               example: 'Contact created'
